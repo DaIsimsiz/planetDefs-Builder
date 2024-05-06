@@ -11,6 +11,7 @@ This specific version is a **Windows only** desktop app designed for Minecraft v
 ## Known problems:
 - Missing textures
 - Inability to export/import XML files
+- Changing screen scaling partially breaks the layout
 
 ## Dependencies
 If the app does not work, try installing **.NET 8 Runtime** manually.
