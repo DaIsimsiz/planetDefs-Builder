@@ -14,22 +14,21 @@ namespace planetDefs_Builder
         readonly string[] neverDelete = ["Galaxy", "Properties", "Attributes"];
         public Form1()
         {
-            Font = new Font(Font.Name, 8.25f * 96f / CreateGraphics().DpiX, Font.Style, Font.Unit, Font.GdiCharSet, Font.GdiVerticalFont);
+            Font = new Font(Font.Name, 8.25f * 96f / CreateGraphics().DpiX, Font.Style, Font.Unit, Font.GdiCharSet, Font.GdiVerticalFont); //??
             InitializeComponent();
+
             galaxyTreeView.DrawNode += galaxyTreeView_DrawNode;
             galaxyTreeView.NodeMouseClick += galaxyTreeView_NodeMouseClick;
             galaxyTreeView.AfterSelect += galaxyTreeView_AfterSelect;
-            ImportButton.MouseEnter += button_MouseEnter;
-            ImportButton.MouseLeave += button_MouseLeave;
-            ImportButton.MouseDown += button_MouseDown;
-            ImportButton.MouseUp += button_MouseUp;
-            ImportButton.Click += ButtonClick;
-            ExportButton.MouseEnter += button_MouseEnter;
-            ExportButton.MouseLeave += button_MouseLeave;
-            ExportButton.MouseDown += button_MouseDown;
-            ExportButton.MouseUp += button_MouseUp;
+
+            ExportButton.MouseEnter += (o, e) => (o as Button).BackgroundImage = Resources.exportHover;
+            ExportButton.MouseLeave += (o, e) => (o as Button).BackgroundImage = Resources.export;
+            ExportButton.MouseDown += (o, e) => (o as Button).BackgroundImage = Resources.exportClicked;
+            ExportButton.MouseUp += (o, e) => (o as Button).BackgroundImage = Resources.exportHover;
             ExportButton.Click += ButtonClick;
 
+            this.DragEnter += (o, e) => e.Effect = e.Data.GetDataPresent(DataFormats.FileDrop) ? DragDropEffects.Copy : e.Effect;
+            this.DragDrop += Form1_DragDrop;
         }
 
         private void galaxyTreeView_AfterSelect(object sender, TreeViewEventArgs e)
@@ -73,7 +72,7 @@ namespace planetDefs_Builder
                     case "properties":
                         if (e.Node.Parent.Name == "planet")
                         {
-                            foreach(KeyValuePair<string, string> specification in References.PlanetSpecifications)
+                            foreach (KeyValuePair<string, string> specification in References.PlanetSpecifications)
                             {
                                 if (!ContainsText(e.Node.Nodes, specification.Key) || specification.Key == "artifact" || specification.Key == "gas")
                                     (cms.Items[0] as ToolStripMenuItem).DropDownItems.Add(specification.Key, null, newElementDropDown_OnClick);
@@ -392,6 +391,11 @@ namespace planetDefs_Builder
             int[] rgbI = [(int)(color[0] * 255f), (int)(color[1] * 255f), (int)(color[2] * 255f)];
             Color Fcolor = Color.FromArgb(rgbI[0], rgbI[1], rgbI[2]);
             return Fcolor;
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

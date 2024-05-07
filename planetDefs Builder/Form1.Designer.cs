@@ -1,4 +1,5 @@
 ﻿using System.Runtime.InteropServices;
+using System.Text.Json;
 using System.Windows.Forms;
 using System.Xml.Linq;
 
@@ -55,7 +56,6 @@ namespace planetDefs_Builder
             pathLabel = new Label();
             descLabel = new Label();
             promptLabel = new Label();
-            ImportButton = new Button();
             ExportButton = new Button();
             SuspendLayout();
             // 
@@ -134,25 +134,6 @@ namespace planetDefs_Builder
             promptLabel.Text = "Value:";
             promptLabel.Visible = false;
             // 
-            // ImportButton
-            // 
-            ImportButton.BackColor = Color.Transparent;
-            ImportButton.BackgroundImage = Resources.import;
-            ImportButton.BackgroundImageLayout = ImageLayout.Center;
-            ImportButton.FlatAppearance.BorderColor = Color.Black;
-            ImportButton.FlatAppearance.BorderSize = 0;
-            ImportButton.FlatAppearance.MouseDownBackColor = Color.Transparent;
-            ImportButton.FlatAppearance.MouseOverBackColor = Color.Transparent;
-            ImportButton.FlatStyle = FlatStyle.Flat;
-            ImportButton.ForeColor = Color.Transparent;
-            ImportButton.Location = new Point(737, 573);
-            ImportButton.Name = "ImportButton";
-            ImportButton.Size = new Size(24, 24);
-            ImportButton.TabIndex = 5;
-            ImportButton.TabStop = false;
-            ImportButton.UseMnemonic = false;
-            ImportButton.UseVisualStyleBackColor = false;
-            // 
             // ExportButton
             // 
             ExportButton.BackColor = Color.Transparent;
@@ -174,11 +155,11 @@ namespace planetDefs_Builder
             // 
             // Form1
             // 
+            AllowDrop = true;
             AutoScaleMode = AutoScaleMode.None;
             BackColor = Color.FromArgb(48, 48, 48);
             ClientSize = new Size(800, 600);
             Controls.Add(ExportButton);
-            Controls.Add(ImportButton);
             Controls.Add(inputTextBox);
             Controls.Add(pathLabel);
             Controls.Add(descLabel);
@@ -191,114 +172,156 @@ namespace planetDefs_Builder
             Name = "Form1";
             SizeGripStyle = SizeGripStyle.Hide;
             Text = "planetDefs Builder";
+            Load += Form1_Load;
             ResumeLayout(false);
             PerformLayout();
         }
 
+        private void Form1_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop)) e.Effect = DragDropEffects.Copy;
+        }
+
+        private void Form1_DragDrop(object sender, DragEventArgs e)
+        {
+            string file = ((string[])e.Data.GetData(DataFormats.FileDrop))[0];
+            try
+            {
+                if (!file.ToLower().EndsWith(".xml")) throw new FileFormatException("Invalid file format.");
+                XDocument Document = XDocument.Parse(File.ReadAllText(file));
+                galaxyTreeView.Nodes.Clear();
+
+                TreeNode galaxy = References.NewTreeNode("Galaxy", "galaxy");
+
+                foreach (XElement star in Document.Root.Elements())
+                {
+                    TreeNode starNode = References.NewTreeNode("null", "star");
+                    TreeNode starAttributes = References.NewTreeNode("Attributes", "attributes");
+                    TreeNode starProperties = References.NewTreeNode("Properties", "properties");
+
+                    foreach (XAttribute starAttribute in star.Attributes())
+                    {
+                        if (starAttribute.Name == "name") starNode.Text = starAttribute.Value;
+                        starAttributes.Nodes.Add(References.NewTreeNode(starAttribute.Name.ToString(), starAttribute.Value));
+                    }
+
+                    if (star.Elements().Count() > 0)
+                        foreach (XElement planet in star.Elements())
+                        {
+                            if (planet.Name == "planet")
+                            {
+                                TreeNode planetNode = References.NewTreeNode("null", "planet");
+                                TreeNode planetAttributes = References.NewTreeNode("Attributes", "attributes");
+                                TreeNode planetProperties = References.NewTreeNode("Properties", "properties");
+
+                                foreach (XAttribute planetAttribute in planet.Attributes())
+                                {
+                                    if (planetAttribute.Name == "name") planetNode.Text = planetAttribute.Value;
+                                    planetAttributes.Nodes.Add(References.NewTreeNode(planetAttribute.Name.ToString(), planetAttribute.Value));
+                                }
+
+                                if (star.Elements().Count() > 0)
+                                    foreach (XElement planetProperty in planet.Elements())
+                                    {
+                                        if (planetProperty.Elements().Count() > 0)
+                                        {
+                                            TreeNode moonNode = References.NewTreeNode("null", "planet");
+                                            TreeNode moonAttributes = References.NewTreeNode("Attributes", "attributes");
+                                            TreeNode moonProperties = References.NewTreeNode("Properties", "properties");
+
+                                            foreach (XAttribute moonAttribute in planetProperty.Attributes())
+                                            {
+                                                if (moonAttribute.Name == "name") planetNode.Text = moonAttribute.Value;
+                                                moonAttributes.Nodes.Add(References.NewTreeNode(moonAttribute.Name.ToString(), moonAttribute.Value));
+                                            }
+                                            if (planetProperty.Elements().Count() > 0)
+                                                foreach (XElement moonProperty in planetProperty.Elements())
+                                                    moonProperties.Nodes.Add(References.NewTreeNode(moonProperty.Name.ToString(), moonProperty.Value));
+
+                                            planetProperties.Nodes.Add(moonNode);
+                                        }
+                                        else planetProperties.Nodes.Add(References.NewTreeNode(planetProperty.Name.ToString(), planetProperty.Value));
+                                    }
+                                planetNode.Nodes.Add(planetAttributes);
+                                planetNode.Nodes.Add(planetProperties);
+                                starProperties.Nodes.Add(planetNode);
+                            }
+                            else
+                            {
+                                TreeNode binaryStarNode = References.NewTreeNode("null", "star");
+                                TreeNode binaryStarAttributes = References.NewTreeNode("Attributes", "attributes");
+
+                                foreach (XAttribute binaryStarAttribute in planet.Attributes())
+                                {
+                                    if (binaryStarAttribute.Name == "name") binaryStarNode.Name = binaryStarAttribute.Value;
+                                    binaryStarAttributes.Nodes.Add(References.NewTreeNode(binaryStarAttribute.Name.ToString(), binaryStarAttribute.Value));
+                                }
+
+                                starProperties.Nodes.Add(binaryStarNode);
+                            }
+                        }
+                    starNode.Nodes.Add(starAttributes);
+                    starNode.Nodes.Add(starProperties);
+                    galaxy.Nodes.Add(starNode);
+                }
+                galaxyTreeView.Nodes.Add(galaxy);
+                MessageBox.Show("The planetDefs.xml file was imported to the application successfully.", "Success!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error has occured while attempting to import XML.\n\nError: {ex}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         private void ButtonClick(object sender, EventArgs e)
         {
-            switch ((sender as Button).Name)
+            XDocument Document = new(new XElement("galaxy")) { Declaration = new XDeclaration("1.0", "UTF-8", "no") };
+            foreach (TreeNode star in galaxyTreeView.Nodes[0].Nodes)
             {
-                case "ImportButton":
-                    break;
-                case "ExportButton":
-                    XDocument Document = new(new XElement("galaxy")) { Declaration = new XDeclaration("1.0", "UTF-8", "no") };
-                    foreach (TreeNode star in galaxyTreeView.Nodes[0].Nodes)
+                XElement starElement = new("star");
+                foreach (TreeNode starAttribute in star.Nodes[0].Nodes)
+                    starElement.Add(new XAttribute(starAttribute.Text, starAttribute.Name));
+
+                if (star.Nodes.Count > 1)
+                    foreach (TreeNode planet in star.Nodes[1].Nodes)
                     {
-                        XElement starElement = new("star");
-                        foreach(TreeNode starAttribute in star.Nodes[0].Nodes)
-                            starElement.Add(new XAttribute(starAttribute.Text, starAttribute.Name));
-
-                        if (star.Nodes.Count > 1)
-                            foreach (TreeNode planet in star.Nodes[1].Nodes)
-                            {
-                                if (planet.Name == "planet")
+                        if (planet.Name == "planet")
+                        {
+                            XElement planetElement = new("planet");
+                            foreach (TreeNode planetAttribute in planet.Nodes[0].Nodes)
+                                planetElement.Add(new XAttribute(planetAttribute.Text, planetAttribute.Name));
+                            if (planet.Nodes[1].Nodes.Count > 0)
+                                foreach (TreeNode planetProperty in planet.Nodes[1].Nodes)
                                 {
-                                    XElement planetElement = new("planet");
-                                    foreach (TreeNode planetAttribute in planet.Nodes[0].Nodes)
-                                        planetElement.Add(new XAttribute(planetAttribute.Text, planetAttribute.Name));
-                                    if (planet.Nodes[1].Nodes.Count > 0)
-                                        foreach (TreeNode planetProperty in planet.Nodes[1].Nodes)
-                                        {
-                                            if (planetProperty.Nodes.Count > 0)
-                                            {
-                                                XElement moonElement = new("planet");
+                                    if (planetProperty.Nodes.Count > 0)
+                                    {
+                                        XElement moonElement = new("planet");
 
-                                                foreach (TreeNode moonAttribute in planetProperty.Nodes[0].Nodes)
-                                                    moonElement.Add(new XAttribute(moonAttribute.Text, moonAttribute.Name));
-                                                if (planetProperty.Nodes[1].Nodes.Count > 0)
-                                                    foreach (TreeNode moonProperty in planetProperty.Nodes[1].Nodes)
-                                                        moonElement.Add(new XAttribute(moonProperty.Text, moonProperty.Name));
+                                        foreach (TreeNode moonAttribute in planetProperty.Nodes[0].Nodes)
+                                            moonElement.Add(new XAttribute(moonAttribute.Text, moonAttribute.Name));
+                                        if (planetProperty.Nodes[1].Nodes.Count > 0)
+                                            foreach (TreeNode moonProperty in planetProperty.Nodes[1].Nodes)
+                                                moonElement.Add(new XAttribute(moonProperty.Text, moonProperty.Name));
 
-                                                planetElement.Add(moonElement);
-                                            }
-                                            else planetElement.Add(new XElement(planetProperty.Text, planetProperty.Name));
-                                        }
-                                    starElement.Add(planetElement);
+                                        planetElement.Add(moonElement);
+                                    }
+                                    else planetElement.Add(new XElement(planetProperty.Text, planetProperty.Name));
                                 }
-                                else
-                                {
-                                    XElement binaryStarElement = new("star");
-                                    foreach (TreeNode starAttribute in star.Nodes[0].Nodes)
-                                        binaryStarElement.Add(new XAttribute(starAttribute.Text, starAttribute.Name));
+                            starElement.Add(planetElement);
+                        }
+                        else
+                        {
+                            XElement binaryStarElement = new("star");
+                            foreach (TreeNode starAttribute in planet.Nodes[0].Nodes)
+                                binaryStarElement.Add(new XAttribute(starAttribute.Text, starAttribute.Name));
 
-                                    starElement.Add(binaryStarElement);
-                                }
-                            }
-                        Document.Root.Add(starElement);
+                            starElement.Add(binaryStarElement);
+                        }
                     }
-                    Document.Save(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\planetDefs.xml");
-                    //Add a pop-up here or smthng
-                    break;
+                Document.Root.Add(starElement);
             }
-        }
-        private void button_MouseEnter(object sender, EventArgs e)
-        {
-            switch ((sender as Button).Name)
-            {
-                case "ImportButton":
-                    (sender as Button).BackgroundImage = Resources.importHover;
-                    break;
-                case "ExportButton":
-                    (sender as Button).BackgroundImage = Resources.exportHover;
-                    break;
-            }
-        }
-        private void button_MouseLeave(object sender, EventArgs e)
-        {
-            switch ((sender as Button).Name)
-            {
-                case "ImportButton":
-                    (sender as Button).BackgroundImage = Resources.import;
-                    break;
-                case "ExportButton":
-                    (sender as Button).BackgroundImage = Resources.export;
-                    break;
-            }
-        }
-        private void button_MouseDown(object sender, EventArgs e)
-        {
-            switch ((sender as Button).Name)
-            {
-                case "ImportButton":
-                    (sender as Button).BackgroundImage = Resources.importClicked;
-                    break;
-                case "ExportButton":
-                    (sender as Button).BackgroundImage = Resources.exportClicked;
-                    break;
-            }
-        }
-        private void button_MouseUp(object sender, EventArgs e)
-        {
-            switch ((sender as Button).Name)
-            {
-                case "ImportButton":
-                    (sender as Button).BackgroundImage = Resources.importHover;
-                    break;
-                case "ExportButton":
-                    (sender as Button).BackgroundImage = Resources.exportHover;
-                    break;
-            }
+            Document.Save(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\planetDefs.xml");
+            MessageBox.Show("The planetDefs.xml file was exported to your desktop successfully.", "Success!", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -326,7 +349,6 @@ namespace planetDefs_Builder
         private Label pathLabel;
         private Label descLabel;
         private Label promptLabel;
-        private Button ImportButton;
         private Button ExportButton;
     }
 

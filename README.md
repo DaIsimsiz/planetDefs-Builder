@@ -6,12 +6,10 @@ This specific version is a **Windows only** desktop app designed for Minecraft v
 
 ![Static Badge](https://img.shields.io/badge/License-GPL%203.0-2ea8ff?link=https%3A%2F%2Fchoosealicense.com%2Flicenses%2Fgpl-3.0%2F)
 ## How to import a `planetDefs.xml` file
-- Placeholder
+Just drag the `planetDefs.xml` file on the app and it will overwrite the current galaxy with the new one!
   
 ## Known problems:
-- Missing textures
-- Inability to export/import XML files
-- Changing screen scaling partially breaks the layout
+- Background colors of TreeView nodes swapping rapidly
 
 ## Dependencies
 If the app does not work, try installing **.NET 8 Runtime** manually.
