@@ -1,5 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace planetDefs_Builder
 {
@@ -54,6 +55,8 @@ namespace planetDefs_Builder
             pathLabel = new Label();
             descLabel = new Label();
             promptLabel = new Label();
+            ImportButton = new Button();
+            ExportButton = new Button();
             SuspendLayout();
             // 
             // galaxyTreeView
@@ -76,6 +79,7 @@ namespace planetDefs_Builder
             galaxyTreeView.SelectedImageIndex = 0;
             galaxyTreeView.Size = new Size(347, 528);
             galaxyTreeView.TabIndex = 0;
+            galaxyTreeView.TabStop = false;
             // 
             // ImageList
             // 
@@ -95,6 +99,7 @@ namespace planetDefs_Builder
             inputTextBox.PlaceholderText = "Enter a value here";
             inputTextBox.Size = new Size(385, 18);
             inputTextBox.TabIndex = 3;
+            inputTextBox.TabStop = false;
             inputTextBox.TextChanged += inputTextBox_TextChanged;
             // 
             // pathLabel
@@ -129,12 +134,51 @@ namespace planetDefs_Builder
             promptLabel.Text = "Value:";
             promptLabel.Visible = false;
             // 
+            // ImportButton
+            // 
+            ImportButton.BackColor = Color.Transparent;
+            ImportButton.BackgroundImage = Resources.import;
+            ImportButton.BackgroundImageLayout = ImageLayout.Center;
+            ImportButton.FlatAppearance.BorderColor = Color.Black;
+            ImportButton.FlatAppearance.BorderSize = 0;
+            ImportButton.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            ImportButton.FlatAppearance.MouseOverBackColor = Color.Transparent;
+            ImportButton.FlatStyle = FlatStyle.Flat;
+            ImportButton.ForeColor = Color.Transparent;
+            ImportButton.Location = new Point(737, 573);
+            ImportButton.Name = "ImportButton";
+            ImportButton.Size = new Size(24, 24);
+            ImportButton.TabIndex = 5;
+            ImportButton.TabStop = false;
+            ImportButton.UseMnemonic = false;
+            ImportButton.UseVisualStyleBackColor = false;
+            // 
+            // ExportButton
+            // 
+            ExportButton.BackColor = Color.Transparent;
+            ExportButton.BackgroundImage = Resources.export;
+            ExportButton.BackgroundImageLayout = ImageLayout.Center;
+            ExportButton.FlatAppearance.BorderColor = Color.Black;
+            ExportButton.FlatAppearance.BorderSize = 0;
+            ExportButton.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            ExportButton.FlatAppearance.MouseOverBackColor = Color.Transparent;
+            ExportButton.FlatStyle = FlatStyle.Flat;
+            ExportButton.ForeColor = Color.Transparent;
+            ExportButton.Location = new Point(773, 573);
+            ExportButton.Name = "ExportButton";
+            ExportButton.Size = new Size(24, 24);
+            ExportButton.TabIndex = 6;
+            ExportButton.TabStop = false;
+            ExportButton.UseMnemonic = false;
+            ExportButton.UseVisualStyleBackColor = false;
+            // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Font;
+            AutoScaleMode = AutoScaleMode.None;
             BackColor = Color.FromArgb(48, 48, 48);
             ClientSize = new Size(800, 600);
+            Controls.Add(ExportButton);
+            Controls.Add(ImportButton);
             Controls.Add(inputTextBox);
             Controls.Add(pathLabel);
             Controls.Add(descLabel);
@@ -149,6 +193,112 @@ namespace planetDefs_Builder
             Text = "planetDefs Builder";
             ResumeLayout(false);
             PerformLayout();
+        }
+
+        private void ButtonClick(object sender, EventArgs e)
+        {
+            switch ((sender as Button).Name)
+            {
+                case "ImportButton":
+                    break;
+                case "ExportButton":
+                    XDocument Document = new(new XElement("galaxy")) { Declaration = new XDeclaration("1.0", "UTF-8", "no") };
+                    foreach (TreeNode star in galaxyTreeView.Nodes[0].Nodes)
+                    {
+                        XElement starElement = new("star");
+                        foreach(TreeNode starAttribute in star.Nodes[0].Nodes)
+                            starElement.Add(new XAttribute(starAttribute.Text, starAttribute.Name));
+
+                        if (star.Nodes.Count > 1)
+                            foreach (TreeNode planet in star.Nodes[1].Nodes)
+                            {
+                                if (planet.Name == "planet")
+                                {
+                                    XElement planetElement = new("planet");
+                                    foreach (TreeNode planetAttribute in planet.Nodes[0].Nodes)
+                                        planetElement.Add(new XAttribute(planetAttribute.Text, planetAttribute.Name));
+                                    if (planet.Nodes[1].Nodes.Count > 0)
+                                        foreach (TreeNode planetProperty in planet.Nodes[1].Nodes)
+                                        {
+                                            if (planetProperty.Nodes.Count > 0)
+                                            {
+                                                XElement moonElement = new("planet");
+
+                                                foreach (TreeNode moonAttribute in planetProperty.Nodes[0].Nodes)
+                                                    moonElement.Add(new XAttribute(moonAttribute.Text, moonAttribute.Name));
+                                                if (planetProperty.Nodes[1].Nodes.Count > 0)
+                                                    foreach (TreeNode moonProperty in planetProperty.Nodes[1].Nodes)
+                                                        moonElement.Add(new XAttribute(moonProperty.Text, moonProperty.Name));
+
+                                                planetElement.Add(moonElement);
+                                            }
+                                            else planetElement.Add(new XElement(planetProperty.Text, planetProperty.Name));
+                                        }
+                                    starElement.Add(planetElement);
+                                }
+                                else
+                                {
+                                    XElement binaryStarElement = new("star");
+                                    foreach (TreeNode starAttribute in star.Nodes[0].Nodes)
+                                        binaryStarElement.Add(new XAttribute(starAttribute.Text, starAttribute.Name));
+
+                                    starElement.Add(binaryStarElement);
+                                }
+                            }
+                        Document.Root.Add(starElement);
+                    }
+                    Document.Save(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\planetDefs.xml");
+                    //Add a pop-up here or smthng
+                    break;
+            }
+        }
+        private void button_MouseEnter(object sender, EventArgs e)
+        {
+            switch ((sender as Button).Name)
+            {
+                case "ImportButton":
+                    (sender as Button).BackgroundImage = Resources.importHover;
+                    break;
+                case "ExportButton":
+                    (sender as Button).BackgroundImage = Resources.exportHover;
+                    break;
+            }
+        }
+        private void button_MouseLeave(object sender, EventArgs e)
+        {
+            switch ((sender as Button).Name)
+            {
+                case "ImportButton":
+                    (sender as Button).BackgroundImage = Resources.import;
+                    break;
+                case "ExportButton":
+                    (sender as Button).BackgroundImage = Resources.export;
+                    break;
+            }
+        }
+        private void button_MouseDown(object sender, EventArgs e)
+        {
+            switch ((sender as Button).Name)
+            {
+                case "ImportButton":
+                    (sender as Button).BackgroundImage = Resources.importClicked;
+                    break;
+                case "ExportButton":
+                    (sender as Button).BackgroundImage = Resources.exportClicked;
+                    break;
+            }
+        }
+        private void button_MouseUp(object sender, EventArgs e)
+        {
+            switch ((sender as Button).Name)
+            {
+                case "ImportButton":
+                    (sender as Button).BackgroundImage = Resources.importHover;
+                    break;
+                case "ExportButton":
+                    (sender as Button).BackgroundImage = Resources.exportHover;
+                    break;
+            }
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -176,6 +326,8 @@ namespace planetDefs_Builder
         private Label pathLabel;
         private Label descLabel;
         private Label promptLabel;
+        private Button ImportButton;
+        private Button ExportButton;
     }
 
     class References
@@ -241,19 +393,8 @@ namespace planetDefs_Builder
             //{ "hasShading", "unknown" },
             //{ "hasColorOverride", "unknown" },
             //{ "skyRenderOverride", "unknown" },
-            { "GasGiant", "If true, the planet will become a Gas Giant, making landing impossible, but it will allow gas to be harvested from its atmosphere." },
-            { "gas", "Specifies which gas(es) are in the Gas Giant's atmosphere." }
-        };
-        /// <summary>
-        /// A list of attributes a binary star may have.
-        /// </summary>
-        static readonly public Dictionary<string, string> BinaryStarAttributes = new()
-        {
-            { "temp", "Temperature of the star, affects it's color. (Sol's temperature is 100)" },
-            { "blackHole", "If true, the star becomes a black hole." },
-            { "size", "Size of the star, default is 1.0" },
-
-            { "separation", "Distance from the center star." }
+            { "GasGiant", "If true, the planet will become a Gas Giant, making landing impossible, but it will allow gas to be harvested from its atmosphere." }, /**/
+            { "gas", "Specifies which gas(es) are in the Gas Giant's atmosphere." } /**/
         };
         /// <summary>
         /// A list of attributes a main star may have.
@@ -268,7 +409,9 @@ namespace planetDefs_Builder
             { "numPlanets", "Number of randomly generated terrestrial planets." },
             { "numGasGiants", "Number of randomly generated gaseous planets." },
             { "x", "X coordinate of the star in galaxy view." },
-            { "y", "Y coordinate of the star in galaxy view." }
+            { "y", "Y coordinate of the star in galaxy view." },
+
+            { "separation", "Distance from the center star." }
         };
     }
 }

@@ -14,10 +14,21 @@ namespace planetDefs_Builder
         readonly string[] neverDelete = ["Galaxy", "Properties", "Attributes"];
         public Form1()
         {
+            Font = new Font(Font.Name, 8.25f * 96f / CreateGraphics().DpiX, Font.Style, Font.Unit, Font.GdiCharSet, Font.GdiVerticalFont);
             InitializeComponent();
             galaxyTreeView.DrawNode += galaxyTreeView_DrawNode;
             galaxyTreeView.NodeMouseClick += galaxyTreeView_NodeMouseClick;
             galaxyTreeView.AfterSelect += galaxyTreeView_AfterSelect;
+            ImportButton.MouseEnter += button_MouseEnter;
+            ImportButton.MouseLeave += button_MouseLeave;
+            ImportButton.MouseDown += button_MouseDown;
+            ImportButton.MouseUp += button_MouseUp;
+            ImportButton.Click += ButtonClick;
+            ExportButton.MouseEnter += button_MouseEnter;
+            ExportButton.MouseLeave += button_MouseLeave;
+            ExportButton.MouseDown += button_MouseDown;
+            ExportButton.MouseUp += button_MouseUp;
+            ExportButton.Click += ButtonClick;
 
         }
 
@@ -67,7 +78,7 @@ namespace planetDefs_Builder
                                 if (!ContainsText(e.Node.Nodes, specification.Key) || specification.Key == "artifact" || specification.Key == "gas")
                                     (cms.Items[0] as ToolStripMenuItem).DropDownItems.Add(specification.Key, null, newElementDropDown_OnClick);
                             }
-                            (cms.Items[0] as ToolStripMenuItem).DropDownItems.Add("Moon", null, newElementDropDown_OnClick);
+                            if (e.Node.Level == 4) (cms.Items[0] as ToolStripMenuItem).DropDownItems.Add("Moon", null, newElementDropDown_OnClick);
                         }
                         else if (e.Node.Parent.Name == "star" && e.Node.Level == 2)
                         {
@@ -150,9 +161,6 @@ namespace planetDefs_Builder
                         ])
                         );
                     break;
-                case "customIcon":
-                    galaxyTreeView.SelectedNode.Nodes.Add(References.NewTreeNode("customIcon", "earthLike"));
-                    break;
                 default:
                     galaxyTreeView.SelectedNode.Nodes.Add(References.NewTreeNode((sender as ToolStripItem).Text, "null"));
                     break;
@@ -221,7 +229,28 @@ namespace planetDefs_Builder
         private Image GetNodeIcon(DrawTreeNodeEventArgs e)
         {
             Image resource;
-            if (e.Node.Name == "planet")
+            if (e.Node.Text == "customIcon")
+            {
+                resource = Resources.GetResource(e.Node.Name);
+                if (resource is null)
+                {
+                    if (File.Exists(e.Node.Name))
+                    {
+                        try
+                        {
+                            return Image.FromFile(e.Node.Name);
+                        }
+                        catch (Exception)
+                        {
+                            return Resources.noIcon;
+                        }
+                    }
+                    else return Resources.noIcon;
+                }
+                else return resource;
+            }
+            else if (e.Node.Name == "galaxy") return Resources.galaxy;
+            else if (e.Node.Name == "planet")
             {
 
                 if (ContainsText(e.Node.Nodes[0].Nodes, "customIcon"))
@@ -282,15 +311,7 @@ namespace planetDefs_Builder
                     }
                 }
             }
-            else
-            {
-                resource = Resources.GetResource(e.Node.Text);
-                if (resource is null)
-                {
-                    return Resources.Placeholder;
-                }
-                else return resource;
-            }
+            else return (Resources.GetResource(e.Node.Text) ?? Resources.GetResource(e.Node.Name)) ?? Resources.Placeholder;
         }
         private int FirstIndexOf(TreeNodeCollection e, string text)
         {
