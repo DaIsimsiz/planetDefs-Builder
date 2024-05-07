@@ -122,15 +122,14 @@ namespace planetDefs_Builder
                     break;
                 case "Binary Star":
                     galaxyTreeView.SelectedNode.Nodes.Add(
-                        References.NewTreeNode("New binary star", "star",
+                        References.NewTreeNode("Binary star", "star",
                         [
                             References.NewTreeNode("Attributes", "attributes",
                                 [
                                     References.NewTreeNode("temp", "70"),
                                     References.NewTreeNode("blackHole", "false"),
                                     References.NewTreeNode("size", "1.0"),
-                                    References.NewTreeNode("name", "New binary star"),
-                                    References.NewTreeNode("separation", "10")
+                                    References.NewTreeNode("separation", "20.0")
                                 ]),
                         ])
                         );
@@ -144,7 +143,25 @@ namespace planetDefs_Builder
                                     References.NewTreeNode("name", "New planet"),
                                     References.NewTreeNode("DIMID", "null")
                                 ]),
-                            References.NewTreeNode("Properties", "properties")
+                            References.NewTreeNode("Properties", "properties",
+                                [
+                                    References.NewTreeNode("isKnown", "false"),
+                                    References.NewTreeNode("fogColor", "1.0,1.0,1.0"),
+                                    References.NewTreeNode("skyColor", "1.0,1.0,1.0"),
+                                    References.NewTreeNode("gravitationalMultiplier", "100"),
+                                    References.NewTreeNode("orbitalDistance", "100"),
+                                    References.NewTreeNode("orbitalTheta", "0"),
+                                    References.NewTreeNode("orbitalPhi", "0"),
+                                    References.NewTreeNode("retrograde", "false"),
+                                    References.NewTreeNode("avgTemperature", "201"),
+                                    References.NewTreeNode("rotationalPeriod", "24000"),
+                                    References.NewTreeNode("atmosphereDensity", "100"),
+                                    References.NewTreeNode("generateCraters", "false"),
+                                    References.NewTreeNode("generateCaves", "false"),
+                                    References.NewTreeNode("generateVolcanos", "false"),
+                                    References.NewTreeNode("generateStructures", "false"),
+                                    References.NewTreeNode("generateGeodes", "false")
+                                ])
                         ])
                         );
                     break;
