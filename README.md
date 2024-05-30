@@ -16,13 +16,13 @@ Just drag the `planetDefs.xml` file on the app and it will overwrite the current
 2. Pick "Bug Report"
 3. Modify the template for your bug report
 4. Submit!
-5. 
+
 ## Making suggestions
 1. Go [here](https://github.com/DaIsimsiz/planetDefs-Builder/issues/new/choose)
 2. Pick "Feature Request"
 3. Modify the template for your bug report
 4. Submit!
-5. 
+
 ## Dependencies
 If the app does not work, try installing **.NET 8 Runtime** manually.
 
