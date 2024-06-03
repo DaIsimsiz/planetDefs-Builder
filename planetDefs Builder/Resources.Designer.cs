@@ -103,9 +103,9 @@ namespace planetDefs_Builder {
         /// <summary>
         ///   System.Drawing.Bitmap türünde yerelleştirilmiş bir kaynak arar.
         /// </summary>
-        internal static System.Drawing.Bitmap biomeIDs {
+        internal static System.Drawing.Bitmap biomeIds {
             get {
-                object obj = ResourceManager.GetObject("biomeIDs", resourceCulture);
+                object obj = ResourceManager.GetObject("biomeIds", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -323,6 +323,16 @@ namespace planetDefs_Builder {
         /// <summary>
         ///   System.Drawing.Bitmap türünde yerelleştirilmiş bir kaynak arar.
         /// </summary>
+        internal static System.Drawing.Bitmap generateCaves {
+            get {
+                object obj = ResourceManager.GetObject("generateCaves", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap türünde yerelleştirilmiş bir kaynak arar.
+        /// </summary>
         internal static System.Drawing.Bitmap generateCraters {
             get {
                 object obj = ResourceManager.GetObject("generateCraters", resourceCulture);
@@ -476,6 +486,16 @@ namespace planetDefs_Builder {
         internal static System.Drawing.Bitmap moon {
             get {
                 object obj = ResourceManager.GetObject("moon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap türünde yerelleştirilmiş bir kaynak arar.
+        /// </summary>
+        internal static System.Drawing.Bitmap moonslist {
+            get {
+                object obj = ResourceManager.GetObject("moonslist", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

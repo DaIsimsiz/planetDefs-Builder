@@ -10,8 +10,8 @@ namespace planetDefs_Builder
 {
     public partial class Form1 : Form
     {
-        readonly string[] collections = ["galaxy", "star", "planet", "properties", "attributes"];
-        readonly string[] neverDelete = ["Galaxy", "Properties", "Attributes"];
+        readonly string[] collections = ["galaxy", "star", "planet", "properties", "attributes", "moonslist"];
+        readonly string[] neverDelete = ["Galaxy", "Properties", "Attributes", "Moons"];
         public Form1()
         {
             Font = new Font(Font.Name, 8.25f * 96f / CreateGraphics().DpiX, Font.Style, Font.Unit, Font.GdiCharSet, Font.GdiVerticalFont); //??
@@ -69,6 +69,9 @@ namespace planetDefs_Builder
                     case "galaxy":
                         (cms.Items[0] as ToolStripMenuItem).DropDownItems.Add("Star", null, newElementDropDown_OnClick);
                         break;
+                    case "moonslist":
+                        (cms.Items[0] as ToolStripMenuItem).DropDownItems.Add("Moon", null, newElementDropDown_OnClick);
+                        break;
                     case "properties":
                         if (e.Node.Parent.Name == "planet")
                         {
@@ -77,7 +80,6 @@ namespace planetDefs_Builder
                                 if (!ContainsText(e.Node.Nodes, specification.Key) || specification.Key == "artifact" || specification.Key == "gas")
                                     (cms.Items[0] as ToolStripMenuItem).DropDownItems.Add(specification.Key, null, newElementDropDown_OnClick);
                             }
-                            if (e.Node.Level == 4) (cms.Items[0] as ToolStripMenuItem).DropDownItems.Add("Moon", null, newElementDropDown_OnClick);
                         }
                         else if (e.Node.Parent.Name == "star" && e.Node.Level == 2)
                         {
@@ -160,7 +162,8 @@ namespace planetDefs_Builder
                                     References.NewTreeNode("generateVolcanos", "false"),
                                     References.NewTreeNode("generateStructures", "false"),
                                     References.NewTreeNode("generateGeodes", "false")
-                                ])
+                                ]),
+                           References.NewTreeNode("Moons", "moonslist")
                         ])
                         );
                     break;
@@ -178,7 +181,9 @@ namespace planetDefs_Builder
                         );
                     break;
                 default:
-                    galaxyTreeView.SelectedNode.Nodes.Add(References.NewTreeNode((sender as ToolStripItem).Text, "null"));
+                    TreeNode newNode = References.NewTreeNode((sender as ToolStripItem).Text, "n/a");
+                    galaxyTreeView.SelectedNode.Nodes.Add(newNode);
+                    //galaxyTreeView.SelectedNode.Nodes.Add(References.NewTreeNode((sender as ToolStripItem).Text, "null"));
                     break;
             }
         }
@@ -206,7 +211,8 @@ namespace planetDefs_Builder
             Console.WriteLine(e.Node.Parent);
 
             e.Node.ForeColor = Color.FromArgb(255, 255, 255);
-            e.Node.BackColor = (e.State & TreeNodeStates.Focused) != 0 ? Color.FromArgb(61, 61, 61) : alternation % 2 == 0 ? Color.FromArgb(35, 35, 35) : Color.FromArgb(40, 40, 40);
+            //e.Node.BackColor = (e.State & TreeNodeStates.Focused) != 0 ? Color.FromArgb(61, 61, 61) : alternation % 2 == 0 ? Color.FromArgb(35, 35, 35) : Color.FromArgb(40, 40, 40);
+            e.Node.BackColor = (e.State & TreeNodeStates.Focused) != 0 ? Color.FromArgb(61, 61, 61) : Color.FromArgb(40, 40, 40);
 
             /*--------- 2. draw expand/collapse icon ---------*/
             Point ptExpand = new(nodeRect.Location.X - 36, nodeRect.Location.Y + 1);
@@ -268,10 +274,10 @@ namespace planetDefs_Builder
             else if (e.Node.Name == "galaxy") return Resources.galaxy;
             else if (e.Node.Name == "planet")
             {
-
-                if (ContainsText(e.Node.Nodes[0].Nodes, "customIcon"))
+                if (e.Node.Nodes.Count < 1) return Resources.noIcon;
+                else if (ContainsText(e.Node.Nodes[0].Nodes, "customIcon"))
                 {
-                    int customIconIndex = FirstIndexOf(e.Node.Nodes[0].Nodes, "customIcon");
+                    int customIconIndex = IndexOfText(e.Node.Nodes[0].Nodes, "customIcon");
                     string customIcon = e.Node.Nodes[0].Nodes[customIconIndex].Name;
 
                     resource = Resources.GetResource(customIcon);
@@ -301,35 +307,41 @@ namespace planetDefs_Builder
             {
                 Bitmap starTemp = Resources.star;
 
-                if (e.Node.Nodes.Count < 1)
+                if (!e.Node.Nodes.ContainsKey("Attributes"))
                 {
                     return Resources.star;
                 }
                 else
                 {
-                    int tempValue = int.TryParse(e.Node.Nodes[0].Nodes[FirstIndexOf(e.Node.Nodes, "temp")].Name, out _) ? int.Parse(e.Node.Nodes[0].Nodes[FirstIndexOf(e.Node.Nodes, "temp")].Name) : 0;
-                    if (e.Node.Nodes[0].Nodes[FirstIndexOf(e.Node.Nodes, "temp")].Text == "temp")
+                    TreeNode attrNode = e.Node.Nodes[e.Node.Nodes.IndexOfKey("Attributes")];
+                    if (ContainsText(attrNode.Nodes, "temp"))
                     {
-                        Color starColor = getColor(tempValue);
-                        for (int x = 0; x < starTemp.Width; x++)
+                        if (attrNode.Nodes[IndexOfText(attrNode.Nodes, "temp")].Text == "temp")
                         {
-                            for (int y = 0; y < starTemp.Height; y++)
+                            int tempValue;
+                            if (int.TryParse(attrNode.Nodes[IndexOfText(attrNode.Nodes, "temp")].Name, out tempValue))
                             {
-                                Color pixelColor = starTemp.GetPixel(x, y);
-                                starTemp.SetPixel(x, y, Color.FromArgb(pixelColor.A, starColor.R, starColor.G, starColor.B));
+                                Color starColor = getColor(tempValue);
+                                for (int x = 0; x < starTemp.Width; x++)
+                                {
+                                    for (int y = 0; y < starTemp.Height; y++)
+                                    {
+                                        Color pixelColor = starTemp.GetPixel(x, y);
+                                        starTemp.SetPixel(x, y, Color.FromArgb(pixelColor.A, starColor.R, starColor.G, starColor.B));
+                                    }
+                                }
+                                return starTemp;
                             }
+                            else return Resources.star;
                         }
-                        return starTemp;
+                        else return Resources.star;
                     }
-                    else
-                    {
-                        return Resources.star;
-                    }
+                    else return Resources.star;
                 }
             }
             else return (Resources.GetResource(e.Node.Text) ?? Resources.GetResource(e.Node.Name)) ?? Resources.Placeholder;
         }
-        private int FirstIndexOf(TreeNodeCollection e, string text)
+        private int IndexOfText(TreeNodeCollection e, string text)
         {
             foreach (TreeNode child in e)
             {

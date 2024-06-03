@@ -213,6 +213,7 @@ namespace planetDefs_Builder
                                 TreeNode planetNode = References.NewTreeNode("null", "planet");
                                 TreeNode planetAttributes = References.NewTreeNode("Attributes", "attributes");
                                 TreeNode planetProperties = References.NewTreeNode("Properties", "properties");
+                                TreeNode planetMoons = References.NewTreeNode("Moons", "moonslist");
 
                                 foreach (XAttribute planetAttribute in planet.Attributes())
                                 {
@@ -231,19 +232,22 @@ namespace planetDefs_Builder
 
                                             foreach (XAttribute moonAttribute in planetProperty.Attributes())
                                             {
-                                                if (moonAttribute.Name == "name") planetNode.Text = moonAttribute.Value;
+                                                if (moonAttribute.Name == "name") moonNode.Text = moonAttribute.Value;
                                                 moonAttributes.Nodes.Add(References.NewTreeNode(moonAttribute.Name.ToString(), moonAttribute.Value));
                                             }
+                                            moonNode.Nodes.Add(moonAttributes);
                                             if (planetProperty.Elements().Count() > 0)
                                                 foreach (XElement moonProperty in planetProperty.Elements())
                                                     moonProperties.Nodes.Add(References.NewTreeNode(moonProperty.Name.ToString(), moonProperty.Value));
+                                            moonNode.Nodes.Add(moonProperties);
 
-                                            planetProperties.Nodes.Add(moonNode);
+                                            planetMoons.Nodes.Add(moonNode);
                                         }
                                         else planetProperties.Nodes.Add(References.NewTreeNode(planetProperty.Name.ToString(), planetProperty.Value));
                                     }
                                 planetNode.Nodes.Add(planetAttributes);
                                 planetNode.Nodes.Add(planetProperties);
+                                planetNode.Nodes.Add(planetMoons);
                                 starProperties.Nodes.Add(planetNode);
                             }
                             else
@@ -290,22 +294,22 @@ namespace planetDefs_Builder
                             XElement planetElement = new("planet");
                             foreach (TreeNode planetAttribute in planet.Nodes[0].Nodes)
                                 planetElement.Add(new XAttribute(planetAttribute.Text, planetAttribute.Name));
-                            if (planet.Nodes[1].Nodes.Count > 0)
-                                foreach (TreeNode planetProperty in planet.Nodes[1].Nodes)
+                            if (planet.Nodes[1].Nodes.Count > 0) foreach (TreeNode planetProperty in planet.Nodes[1].Nodes) planetElement.Add(new XElement(planetProperty.Text, planetProperty.Name));
+                            if (planet.Nodes[2].Nodes.Count > 0) foreach (TreeNode moon in planet.Nodes[2].Nodes)
                                 {
-                                    if (planetProperty.Nodes.Count > 0)
+                                    if (moon.Nodes.Count > 0)
                                     {
                                         XElement moonElement = new("planet");
 
-                                        foreach (TreeNode moonAttribute in planetProperty.Nodes[0].Nodes)
+                                        foreach (TreeNode moonAttribute in moon.Nodes[0].Nodes)
                                             moonElement.Add(new XAttribute(moonAttribute.Text, moonAttribute.Name));
-                                        if (planetProperty.Nodes[1].Nodes.Count > 0)
-                                            foreach (TreeNode moonProperty in planetProperty.Nodes[1].Nodes)
-                                                moonElement.Add(new XAttribute(moonProperty.Text, moonProperty.Name));
+                                        if (moon.Nodes[1].Nodes.Count > 0)
+                                            foreach (TreeNode moonProperty in moon.Nodes[1].Nodes)
+                                                moonElement.Add(new XElement(moonProperty.Text, moonProperty.Name));
 
                                         planetElement.Add(moonElement);
                                     }
-                                    else planetElement.Add(new XElement(planetProperty.Text, planetProperty.Name));
+                                    else planetElement.Add(new XElement(moon.Text, moon.Name));
                                 }
                             starElement.Add(planetElement);
                         }
@@ -339,7 +343,16 @@ namespace planetDefs_Builder
 
 
             g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
-            g.DrawString("Development build", new Font("Cascadia Code", 16), Brushes.White, new Point(4, 573));
+            g.DrawString("1.0.1-rc", new Font("Cascadia Code", 12), Brushes.White, new Point(4, 576));
+            // MAJOR.MEDIUM.MINOR
+            // MAJOR => Major code changes, code has become unrecognizable from the previous major build
+            // MEDIUM => A new unique feature is added
+            // MINOR => An existing feature has been tweaked, the code is relatively the same
+            // TAG =>
+            //      rc - Release candidate
+            //      beta - Unstable
+            //      dev - Development build (debug features added)
+            //      xp - Experimental build (new features)
         }
 
         #endregion
