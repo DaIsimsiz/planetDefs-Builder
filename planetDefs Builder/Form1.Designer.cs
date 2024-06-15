@@ -21,6 +21,8 @@ namespace planetDefs_Builder
     }
     partial class Form1
     {
+        static string versionID = "1.0.2-rc";
+
         /// <summary>
         ///  Required designer variable.
         /// </summary>
@@ -101,6 +103,7 @@ namespace planetDefs_Builder
             inputTextBox.TabIndex = 3;
             inputTextBox.TabStop = false;
             inputTextBox.TextChanged += inputTextBox_TextChanged;
+            inputTextBox.Enabled = false;
             // 
             // pathLabel
             // 
@@ -343,7 +346,7 @@ namespace planetDefs_Builder
 
 
             g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
-            g.DrawString("1.0.1-rc", new Font("Cascadia Code", 12), Brushes.White, new Point(4, 576));
+            g.DrawString(versionID, new Font("Cascadia Code", 12), Brushes.White, new Point(4, 576));
             // MAJOR.MEDIUM.MINOR
             // MAJOR => Major code changes, code has become unrecognizable from the previous major build
             // MEDIUM => A new unique feature is added
@@ -447,6 +450,18 @@ namespace planetDefs_Builder
             { "y", "Y coordinate of the star in galaxy view." },
 
             { "separation", "Distance from the center star." }
+        };
+        /// <summary>
+        /// A list of collections used by the program.
+        /// </summary>
+        static readonly public Dictionary<string, string> Collections = new()
+        {
+            { "galaxy", "The root element of this galaxy. All of the stars have to be children of this element to work correctly!" },
+            { "star", "A star!" },
+            { "planet", "A planet/moon orbiting a parent celestial body!" },
+            { "properties", "A list of properties of this celestial body. These are displayed as separate XML elements." },
+            { "attributes", "A list of specification for this celestial body. These are displayed together with the XML element for this body." },
+            { "moonslist", "A list of moons this planet has. This is no different than a property list, but it is separated in this app for simplicity." }
         };
     }
 }

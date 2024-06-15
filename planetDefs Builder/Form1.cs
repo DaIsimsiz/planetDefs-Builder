@@ -33,18 +33,30 @@ namespace planetDefs_Builder
 
         private void galaxyTreeView_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            if (collections.Contains(e.Node.Name)) return;
             pathLabel.Text = e.Node.FullPath.Replace('\\', '>');
-            if (e.Node.Parent.Parent.Name == "star") descLabel.Text = References.StarAttributes[e.Node.Text];
-            else //Planet
+            if (collections.Contains(e.Node.Name)) descLabel.Text = References.Collections[e.Node.Name];
+            else if (e.Node.Parent.Parent.Name == "star") descLabel.Text = References.StarAttributes[e.Node.Text];
+            else /*if(e.Node.Parent.Parent.Name == "planet")*/ //Planet
             {
                 if (e.Node.Parent.Name == "attributes") descLabel.Text = References.PlanetAttributes[e.Node.Text];
                 else descLabel.Text = References.PlanetSpecifications[e.Node.Text];
             }
-            promptLabel.Visible = true;
-            inputTextBox.TextChanged -= inputTextBox_TextChanged;
-            inputTextBox.Text = e.Node.Name;
-            inputTextBox.TextChanged += inputTextBox_TextChanged;
+
+            if (collections.Contains(e.Node.Name))
+            {
+                promptLabel.Visible = false;
+                inputTextBox.TextChanged -= inputTextBox_TextChanged;
+                inputTextBox.Text = "";
+                inputTextBox.Enabled = false;
+            }
+            else
+            {
+                promptLabel.Visible = true;
+                inputTextBox.TextChanged -= inputTextBox_TextChanged;
+                inputTextBox.Text = e.Node.Name;
+                inputTextBox.TextChanged += inputTextBox_TextChanged;
+                inputTextBox.Enabled = true;
+            }
         }
 
         private void inputTextBox_TextChanged(object sender, EventArgs e)
