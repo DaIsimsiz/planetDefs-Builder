@@ -21,7 +21,8 @@ Steps to reproduce the behavior:
 A clear and concise description of what you expected to happen.
 
 **Media**
-If applicable, add screenshots, videos, or files (like the planetDefs.xml used for this bug) to help explain your problem and speed up the bug fixing process.
+If applicable, add screenshots, videos, or the planetDefs.xml used for this report to help explain your problem and speed up the bug fixing process.
+Addittionally, please make sure to provide the new (and experimental) log files in your AppData folder (Appdata\planetDefs Builder\Logs), please make sure to send only the logs relevant to this bug report.
 
 **Additional context**
 Add any other context about the problem here.
