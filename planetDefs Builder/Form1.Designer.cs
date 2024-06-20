@@ -21,7 +21,16 @@ namespace planetDefs_Builder
     }
     partial class Form1
     {
-        static string versionID = "1.0.2-rc";
+        static string versionID = "1.1.0-rc";
+        // MAJOR.MEDIUM.MINOR
+        // MAJOR => Major code changes, code has become unrecognizable from the previous major build
+        // MEDIUM => A new unique feature is added
+        // MINOR => An existing feature has been tweaked, the code is relatively the same
+        // TAG =>
+        //      rc - Release candidate
+        //      beta - Unstable
+        //      dev - Development build (debug features added)
+        //      xp - Experimental build (new features)
 
         /// <summary>
         ///  Required designer variable.
@@ -182,11 +191,13 @@ namespace planetDefs_Builder
 
         private void Form1_DragEnter(object sender, DragEventArgs e)
         {
+            Log($"File dragged in");
             if (e.Data.GetDataPresent(DataFormats.FileDrop)) e.Effect = DragDropEffects.Copy;
         }
 
         private void Form1_DragDrop(object sender, DragEventArgs e)
         {
+            Log($"File dropped in: FILENAME:{((string[])e.Data.GetData(DataFormats.FileDrop))[0]} FILECONTENTS:{XDocument.Parse(File.ReadAllText(((string[])e.Data.GetData(DataFormats.FileDrop))[0]))}");
             string file = ((string[])e.Data.GetData(DataFormats.FileDrop))[0];
             try
             {
@@ -255,14 +266,15 @@ namespace planetDefs_Builder
                             }
                             else
                             {
-                                TreeNode binaryStarNode = References.NewTreeNode("null", "star");
+                                TreeNode binaryStarNode = References.NewTreeNode("Binary Star", "star");
                                 TreeNode binaryStarAttributes = References.NewTreeNode("Attributes", "attributes");
 
                                 foreach (XAttribute binaryStarAttribute in planet.Attributes())
                                 {
-                                    if (binaryStarAttribute.Name == "name") binaryStarNode.Name = binaryStarAttribute.Value;
+                                    if (binaryStarAttribute.Name == "name") binaryStarNode.Text = binaryStarAttribute.Value;
                                     binaryStarAttributes.Nodes.Add(References.NewTreeNode(binaryStarAttribute.Name.ToString(), binaryStarAttribute.Value));
                                 }
+                                binaryStarNode.Nodes.Add(binaryStarAttributes);
 
                                 starProperties.Nodes.Add(binaryStarNode);
                             }
@@ -273,15 +285,18 @@ namespace planetDefs_Builder
                 }
                 galaxyTreeView.Nodes.Add(galaxy);
                 MessageBox.Show("The planetDefs.xml file was imported to the application successfully.", "Success!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Log($"Import successful");
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"An error has occured while attempting to import XML.\n\nError: {ex}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Log($"Import failed: INFO:{ex}", "WARNING");
             }
         }
 
         private void ButtonClick(object sender, EventArgs e)
         {
+            Log($"Export triggered");
             XDocument Document = new(new XElement("galaxy")) { Declaration = new XDeclaration("1.0", "UTF-8", "no") };
             foreach (TreeNode star in galaxyTreeView.Nodes[0].Nodes)
             {
@@ -329,6 +344,7 @@ namespace planetDefs_Builder
             }
             Document.Save(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\planetDefs.xml");
             MessageBox.Show("The planetDefs.xml file was exported to your desktop successfully.", "Success!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            Log($"Export ended: {Document.ToString()}");
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -347,15 +363,6 @@ namespace planetDefs_Builder
 
             g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
             g.DrawString(versionID, new Font("Cascadia Code", 12), Brushes.White, new Point(4, 576));
-            // MAJOR.MEDIUM.MINOR
-            // MAJOR => Major code changes, code has become unrecognizable from the previous major build
-            // MEDIUM => A new unique feature is added
-            // MINOR => An existing feature has been tweaked, the code is relatively the same
-            // TAG =>
-            //      rc - Release candidate
-            //      beta - Unstable
-            //      dev - Development build (debug features added)
-            //      xp - Experimental build (new features)
         }
 
         #endregion
@@ -393,11 +400,11 @@ namespace planetDefs_Builder
         /// </summary>
         static readonly public Dictionary<string, string> PlanetSpecifications = new()
         {
-            { "isKnown", "If true, the planet will have to be discovered from the Warp Controller." },
+            { "isKnown", "If false, the planet will have to be discovered from the Warp Controller." },
             { "hasRings", "If true, the planet will have rings." },
             { "genType", "Experimental specification, 0 is overworld-like generation, 1 is nether-like generation and 2 is asteroids." },
-            { "fogColor", "3 floating point numbers (1.0 - 0) or a hex code (0xFFFFFF) to choose the distance fog color. (e.g 1.0,1.0,1.0)" },
-            { "skyColor", "3 floating point numbers (1.0 - 0) or a hex code (0xFFFFFF) to choose the sky color. (e.g 1.0,1.0,1.0)" },
+            { "fogColor", "3 floating point numbers (1.0 - 0.0) or a hex code (0xFFFFFF) to choose the distance fog color. (e.g 1.0,1.0,1.0)" },
+            { "skyColor", "3 floating point numbers (1.0 - 0.0) or a hex code (0xFFFFFF) to choose the sky color. (e.g 1.0,1.0,1.0)" },
             { "atmosphereDensity", "Atmospheric pressure of a planet, it affects the temperature. Default is 100 (1 atm = 100)" },
             { "hasOxygen", "Specifies if the oxygen is breathable." },
             { "gravitationalMultiplier", "G force on the planet, default is 100, but values above 110 will prevent 1 block jumps. (max 400 - min 0)" },
@@ -416,9 +423,8 @@ namespace planetDefs_Builder
             { "generateVolcanos", "If true, planet will have volcanoes on it." },
             { "generateStructures", "If true, all sorts of structures will spawn on the planet." },
             { "generateGeodes", "If true, geodes will spawn on the planet." },
-            { "avgTemperature", "Average temperature of the planet, affects atmosphere. (Default is 100)" },
             { "retrograde", "If true, orbit direction swaps to counter-clockwise." },
-            { "ringColor", "3 floating point numbers (1.0 - 0) or a hex code (0xFFFFFF) to choose the color of the rings. (e.g 1.0,1.0,1.0)" },
+            { "ringColor", "3 floating point numbers (1.0 - 0.0) or a hex code (0xFFFFFF) to choose the color of the rings. (e.g 1.0,1.0,1.0)" },
             //{ "forceRiverGeneration", "If true, regardless of the other conditions, rivers will spawn." },
             //{ "oreGen", "do not use" },
             //{ "laserDrillOres", "Unknown." },

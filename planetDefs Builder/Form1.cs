@@ -1,5 +1,7 @@
 using System.Diagnostics;
 using System.Drawing;
+using System.Globalization;
+using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 
 #pragma warning disable IDE1006
@@ -14,8 +16,28 @@ namespace planetDefs_Builder
         readonly string[] neverDelete = ["Galaxy", "Properties", "Attributes", "Moons"];
         public Form1()
         {
+            //----------------------------------------------------------------------------------
+            //AppData files
+            string AppData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            string pdbAppData = AppData + @"\planetDefs Builder";
+            string[] subDirs = [pdbAppData + @"\config", pdbAppData + @"\logs"];
+            string logFile = @$"{subDirs[1]}\{DateTime.UtcNow.ToString(new DateTimeFormatInfo().SortableDateTimePattern).Replace(':', '-')}.log";
+
+            //Create directories
+            if (!Directory.Exists(pdbAppData)) Directory.CreateDirectory(pdbAppData);
+            foreach (string subDir in subDirs) if (!Directory.Exists(subDir)) Directory.CreateDirectory(subDir);
+
+            //Create log file for today
+            FileStream logFS = File.Create(logFile);
+            Console.SetOut(new StreamWriter(logFS));
+
+            //----------------------------------------------------------------------------------
+
             Font = new Font(Font.Name, 8.25f * 96f / CreateGraphics().DpiX, Font.Style, Font.Unit, Font.GdiCharSet, Font.GdiVerticalFont); //??
             InitializeComponent();
+            Log("Initialized Form Components");
+
+            AppDomain.CurrentDomain.ProcessExit += (o, e) => Log($"ProcessExit at {DateTime.UtcNow}");
 
             galaxyTreeView.DrawNode += galaxyTreeView_DrawNode;
             galaxyTreeView.NodeMouseClick += galaxyTreeView_NodeMouseClick;
@@ -29,10 +51,12 @@ namespace planetDefs_Builder
 
             this.DragEnter += (o, e) => e.Effect = e.Data.GetDataPresent(DataFormats.FileDrop) ? DragDropEffects.Copy : e.Effect;
             this.DragDrop += Form1_DragDrop;
+            Log("Added event listeners");
         }
 
         private void galaxyTreeView_AfterSelect(object sender, TreeViewEventArgs e)
         {
+            Log($"Triggered by node: NAME:{e.Node.Name} TEXT:{e.Node.Text} PATH:{e.Node.FullPath} ");
             pathLabel.Text = e.Node.FullPath.Replace('\\', '>');
             if (collections.Contains(e.Node.Name)) descLabel.Text = References.Collections[e.Node.Name];
             else if (e.Node.Parent.Parent.Name == "star") descLabel.Text = References.StarAttributes[e.Node.Text];
@@ -61,6 +85,7 @@ namespace planetDefs_Builder
 
         private void inputTextBox_TextChanged(object sender, EventArgs e)
         {
+            Log($"Text changed: NODENAME:{galaxyTreeView.SelectedNode.Name} NODETEXT:{galaxyTreeView.SelectedNode.Text} NODEPATH:{galaxyTreeView.SelectedNode.FullPath} TEXTBOX:{inputTextBox.Text}");
             galaxyTreeView.BeginUpdate();
             if (collections.Contains(galaxyTreeView.SelectedNode.Name)) return;
             galaxyTreeView.SelectedNode.Name = inputTextBox.Text;
@@ -70,6 +95,7 @@ namespace planetDefs_Builder
 
         private void galaxyTreeView_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
+            Log($"Triggered by node: NAME:{e.Node.Name} TEXT:{e.Node.Text} PATH:{e.Node.FullPath} ");
             galaxyTreeView.SelectedNode = e.Node;
             if (e.Node.Name == "attributes" && e.Node.Level == 2) return;
             ContextMenuStrip cms = new();
@@ -112,6 +138,7 @@ namespace planetDefs_Builder
 
         private void newElementDropDown_OnClick(object? sender, EventArgs e)
         {
+            Log($"Dropdown element selected: ELEMENT:{(sender as ToolStripItem).Text} NODENAME:{galaxyTreeView.SelectedNode.Name} NODETEXT:{galaxyTreeView.SelectedNode.Text} NODEPATH:{galaxyTreeView.SelectedNode.FullPath}");
             switch ((sender as ToolStripItem).Text)
             {
                 case "Star":
@@ -135,13 +162,14 @@ namespace planetDefs_Builder
                     break;
                 case "Binary Star":
                     galaxyTreeView.SelectedNode.Nodes.Add(
-                        References.NewTreeNode("Binary star", "star",
+                        References.NewTreeNode("New binary star", "star",
                         [
                             References.NewTreeNode("Attributes", "attributes",
                                 [
                                     References.NewTreeNode("temp", "70"),
                                     References.NewTreeNode("blackHole", "false"),
                                     References.NewTreeNode("size", "1.0"),
+                                    References.NewTreeNode("name", "New binary star"),
                                     References.NewTreeNode("separation", "20.0")
                                 ]),
                         ])
@@ -202,6 +230,7 @@ namespace planetDefs_Builder
 
         private void cms_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
+            Log($"ContextMenu element selected: ELEMENT:{e.ClickedItem.Text} NODENAME:{galaxyTreeView.SelectedNode.Name} NODETEXT:{galaxyTreeView.SelectedNode.Text} NODEPATH:{galaxyTreeView.SelectedNode.FullPath}");
             switch (e.ClickedItem.Text)
             {
                 case "New element":
@@ -215,6 +244,7 @@ namespace planetDefs_Builder
 
         private void galaxyTreeView_DrawNode(object sender, DrawTreeNodeEventArgs e)
         {
+            Log($"DrawNode called: NAME:{e.Node.Name} TEXT:{e.Node.Text} PATH:{e.Node.FullPath}");
             if (e.Node.Name == "galaxy") alternation = 0;
             else alternation++;
 
@@ -262,6 +292,7 @@ namespace planetDefs_Builder
         static int alternation = 0;
         private Image GetNodeIcon(DrawTreeNodeEventArgs e)
         {
+            Log($"GetNodeIcon called: NAME:{e.Node.Name} TEXT:{e.Node.Text} PATH:{e.Node.FullPath}");
             Image resource;
             if (e.Node.Text == "customIcon")
             {
@@ -415,6 +446,10 @@ namespace planetDefs_Builder
             int[] rgbI = [(int)(color[0] * 255f), (int)(color[1] * 255f), (int)(color[2] * 255f)];
             Color Fcolor = Color.FromArgb(rgbI[0], rgbI[1], rgbI[2]);
             return Fcolor;
+        }
+        public void Log(string message, string level = "DEBUG", [CallerMemberName] string cmn = "")
+        {
+            Console.WriteLine($@"[{DateTime.UtcNow}] [{cmn}] [{level}] : {message}");
         }
 
         private void Form1_Load(object sender, EventArgs e)
