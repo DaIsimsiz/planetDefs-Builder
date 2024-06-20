@@ -250,7 +250,6 @@ namespace planetDefs_Builder
 
             Rectangle nodeRect = e.Node.Bounds;
             if (e.Node.Bounds.X == 0) return;
-            Console.WriteLine(e.Node.Parent);
 
             e.Node.ForeColor = Color.FromArgb(255, 255, 255);
             //e.Node.BackColor = (e.State & TreeNodeStates.Focused) != 0 ? Color.FromArgb(61, 61, 61) : alternation % 2 == 0 ? Color.FromArgb(35, 35, 35) : Color.FromArgb(40, 40, 40);
@@ -449,7 +448,7 @@ namespace planetDefs_Builder
         }
         public void Log(string message, string level = "DEBUG", [CallerMemberName] string cmn = "")
         {
-            Console.WriteLine($@"[{DateTime.UtcNow}] [{cmn}] [{level}] : {message}");
+            Console.WriteLine($@"[{DateTime.UtcNow}] [{cmn}] [{level}] : {message}".Replace('\n', ' '));
         }
 
         private void Form1_Load(object sender, EventArgs e)
