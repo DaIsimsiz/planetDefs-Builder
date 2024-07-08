@@ -401,6 +401,7 @@ namespace planetDefs_Builder
         }
         private Color getColor(int temp)
         {
+            if (temp < 0) return Color.FromArgb(255, 255, 255);
             //Define
             float[] color = new float[3];
             float temperature = (temp * 0.477f) + 10f; //0 -> 10 100 -> 57.7

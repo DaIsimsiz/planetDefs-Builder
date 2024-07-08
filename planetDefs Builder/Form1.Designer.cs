@@ -21,7 +21,7 @@ namespace planetDefs_Builder
     }
     partial class Form1
     {
-        static string versionID = "1.1.0-rc";
+        static string versionID = "1.1.1-rc";
         // MAJOR.MEDIUM.MINOR
         // MAJOR => Major code changes, code has become unrecognizable from the previous major build
         // MEDIUM => A new unique feature is added
@@ -197,7 +197,7 @@ namespace planetDefs_Builder
 
         private void Form1_DragDrop(object sender, DragEventArgs e)
         {
-            Log($"File dropped in: FILENAME:{((string[])e.Data.GetData(DataFormats.FileDrop))[0]} FILECONTENTS:{XDocument.Parse(File.ReadAllText(((string[])e.Data.GetData(DataFormats.FileDrop))[0]))}");
+            Log($"File dropped in: FILENAME:{((string[])e.Data.GetData(DataFormats.FileDrop))[0]} FILECONTENTS:{File.ReadAllText(((string[])e.Data.GetData(DataFormats.FileDrop))[0])}");
             string file = ((string[])e.Data.GetData(DataFormats.FileDrop))[0];
             try
             {
