@@ -21,15 +21,14 @@ namespace planetDefs_Builder
     }
     partial class Form1
     {
-        static string versionID = "1.1.1-rc";
-        // MAJOR.MEDIUM.MINOR
+        static string versionID = "1.1.2-xp";
+        // MAJOR.MEDIUM.MINOR-TAG
         // MAJOR => Major code changes, code has become unrecognizable from the previous major build
         // MEDIUM => A new unique feature is added
         // MINOR => An existing feature has been tweaked, the code is relatively the same
         // TAG =>
         //      rc - Release candidate
         //      beta - Unstable
-        //      dev - Development build (debug features added)
         //      xp - Experimental build (new features)
 
         /// <summary>
@@ -68,6 +67,10 @@ namespace planetDefs_Builder
             descLabel = new Label();
             promptLabel = new Label();
             ExportButton = new Button();
+            map = new PictureBox();
+            folderBrowser = new FolderBrowserDialog();
+            button1 = new Button();
+            ((System.ComponentModel.ISupportInitialize)map).BeginInit();
             SuspendLayout();
             // 
             // galaxyTreeView
@@ -103,6 +106,7 @@ namespace planetDefs_Builder
             // 
             inputTextBox.BackColor = Color.FromArgb(15, 15, 15);
             inputTextBox.BorderStyle = BorderStyle.None;
+            inputTextBox.Enabled = false;
             inputTextBox.Font = new Font("Segoe UI", 10F);
             inputTextBox.ForeColor = Color.FromArgb(240, 240, 240);
             inputTextBox.Location = new Point(392, 529);
@@ -112,22 +116,22 @@ namespace planetDefs_Builder
             inputTextBox.TabIndex = 3;
             inputTextBox.TabStop = false;
             inputTextBox.TextChanged += inputTextBox_TextChanged;
-            inputTextBox.Enabled = false;
             // 
             // pathLabel
             // 
             pathLabel.BackColor = Color.FromArgb(81, 81, 81);
-            pathLabel.Font = new Font("Segoe UI", 10F);
+            pathLabel.Font = new Font("Segoe UI", 7.5F);
             pathLabel.ForeColor = Color.FromArgb(240, 240, 240);
             pathLabel.Location = new Point(389, 440);
             pathLabel.Name = "pathLabel";
             pathLabel.Size = new Size(388, 21);
             pathLabel.TabIndex = 2;
+            pathLabel.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // descLabel
             // 
             descLabel.BackColor = Color.FromArgb(61, 61, 61);
-            descLabel.Font = new Font("Segoe UI", 10F);
+            descLabel.Font = new Font("Segoe UI", 8F);
             descLabel.ForeColor = Color.FromArgb(240, 240, 240);
             descLabel.Location = new Point(389, 463);
             descLabel.Name = "descLabel";
@@ -165,12 +169,43 @@ namespace planetDefs_Builder
             ExportButton.UseMnemonic = false;
             ExportButton.UseVisualStyleBackColor = false;
             // 
+            // map
+            // 
+            map.BackColor = Color.Black;
+            map.Location = new Point(383, 17);
+            map.Name = "map";
+            map.Size = new Size(400, 400);
+            map.TabIndex = 7;
+            map.TabStop = false;
+            // 
+            // button1
+            // 
+            button1.BackColor = Color.Transparent;
+            button1.BackgroundImage = Resources.folderBrowser;
+            button1.BackgroundImageLayout = ImageLayout.Center;
+            button1.FlatAppearance.BorderColor = Color.Black;
+            button1.FlatAppearance.BorderSize = 0;
+            button1.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            button1.FlatAppearance.MouseOverBackColor = Color.Transparent;
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.ForeColor = Color.Transparent;
+            button1.Location = new Point(736, 573);
+            button1.Name = "button1";
+            button1.Size = new Size(24, 24);
+            button1.TabIndex = 6;
+            button1.TabStop = false;
+            button1.UseMnemonic = false;
+            button1.UseVisualStyleBackColor = false;
+            // 
             // Form1
             // 
             AllowDrop = true;
             AutoScaleMode = AutoScaleMode.None;
+            AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackColor = Color.FromArgb(48, 48, 48);
             ClientSize = new Size(800, 600);
+            Controls.Add(button1);
+            Controls.Add(map);
             Controls.Add(ExportButton);
             Controls.Add(inputTextBox);
             Controls.Add(pathLabel);
@@ -185,6 +220,7 @@ namespace planetDefs_Builder
             SizeGripStyle = SizeGripStyle.Hide;
             Text = "planetDefs Builder";
             Load += Form1_Load;
+            ((System.ComponentModel.ISupportInitialize)map).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -211,7 +247,7 @@ namespace planetDefs_Builder
                 {
                     TreeNode starNode = References.NewTreeNode("null", "star");
                     TreeNode starAttributes = References.NewTreeNode("Attributes", "attributes");
-                    TreeNode starProperties = References.NewTreeNode("Properties", "properties");
+                    TreeNode starProperties = References.NewTreeNode("Orbiting bodies", "properties");
 
                     foreach (XAttribute starAttribute in star.Attributes())
                     {
@@ -373,6 +409,9 @@ namespace planetDefs_Builder
         private Label descLabel;
         private Label promptLabel;
         private Button ExportButton;
+        private PictureBox map;
+        private FolderBrowserDialog folderBrowser;
+        private Button button1;
     }
 
     class References
@@ -393,7 +432,7 @@ namespace planetDefs_Builder
             { "name", "Name of the planet" },
             { "DIMID", "Dimension ID for the planet, make sure to not use an ID in use!"},
             { "dimMapping", "Enter an empty string if the dimension you have specifies already exists." },
-            { "customIcon", "You can choose a custom icon if you want to specify which one should be used."}
+            { "customIcon", "You can choose a custom icon if you want to specify which one should be used. You can either use one of the default ones like: gasgiantbrown, venusian, marslike, moon, and earthlike! (Check the wiki to find out more)"}
         };
         /// <summary>
         /// A list of properties a planet may have.
@@ -433,7 +472,7 @@ namespace planetDefs_Builder
             //{ "craterBiomeWeights", "unknown" },
             { "craterFrequencyMultiplier", "A lower value means a higher amount of craters" },
             { "volcanoFrequencyMultiplier", "A lower value means a higher amount of volcanos" },
-            { "geodefrequencyMultiplier", "A lower value means a higher amount of geodes" },
+            { "geodeFrequencyMultiplier", "A lower value means a higher amount of geodes" },
             //{ "hasShading", "unknown" },
             //{ "hasColorOverride", "unknown" },
             //{ "skyRenderOverride", "unknown" },

@@ -118,158 +118,95 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="artifact" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\artifact.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="atmosphereDensity" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\atmosphereDensity.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="attributes" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\attributes.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="avgTemperature" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\avgTemperature.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="biomeIds" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\biomeIDs.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="blackHole" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\blackHole.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="temp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\temp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="carbonworld" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\carbonworld.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Collapse" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\Collapse.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="hasOxygen" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\hasOxygen.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="craterFreqeuncyMultiplier" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\craterFreqeuncyMultiplier.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="avgTemperature" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\avgTemperature.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="craterOres" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\craterOres.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="orbitalPhi" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\orbitalPhi.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="desertworld" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\desertworld.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="DIMID" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\DIMID.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="dimMapping" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\dimMapping.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="earthlike" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\earthlike.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Expand" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\Expand.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="export" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\export.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="exportClicked" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\exportClicked.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="exportHover" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\exportHover.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="fillerBlock" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\fillerBlock.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="fogColor" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\fogColor.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="galaxy" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\galaxy.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="skyColor" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\skyColor.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="gas" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\gas.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="GasGiant" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\GasGiant.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="noIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\noIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="gasgiantblue" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\gasgiantblue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="desertworld" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\desertworld.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="volcanoFrequencyMultiplier" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\volcanoFrequencyMultiplier.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="gasgiantbrown" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\gasgiantbrown.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="gasgiantred" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\gasgiantred.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="moonslist" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\moonslist.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="generateCaves" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\generateCaves.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Expand" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\Expand.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="generateCraters" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\generateCraters.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="size" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\size.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="generateGeodes" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\generateGeodes.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="generateStructures" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\generateStructures.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="generateVolcanos" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\generateVolcanos.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="genType" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\genType.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="geodeFrequencyMultiplier" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\geodeFrequencyMultiplier.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="geodeOres" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\geodeOres.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="gravitationalMultiplier" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\gravitationalMultiplier.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="hasOxygen" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\hasOxygen.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="hasRings" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\hasRings.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="iceworld" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\iceworld.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="isKnown" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\isKnown.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="lava" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\lava.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="marslike" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\marslike.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="y" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\y.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="moon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\moon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="moonslist" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\moonslist.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="ringColor" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\ringColor.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="name" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\name.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="craterFrequencyMultiplier" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\craterFreqeuncyMultiplier.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="noIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\noIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="artifact" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\artifact.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="numGasGiants" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\numGasGiants.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="gasgiantred" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\gasgiantred.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="numPlanets" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\numPlanets.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="iceworld" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\iceworld.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="oceanBlock" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\oceanBlock.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="earthlike" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\earthlike.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="exportHover" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\exportHover.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="rotationalPeriod" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\rotationalPeriod.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="generateStructures" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\generateStructures.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="properties" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\properties.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="craterOres" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\craterOres.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="orbitalDistance" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\orbitalDistance.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="orbitalPhi" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\orbitalPhi.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="galaxy" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\galaxy.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="lava" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\lava.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="orbitalTheta" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\orbitalTheta.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -277,49 +214,115 @@
   <data name="Placeholder" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\Placeholder.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="properties" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\properties.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="biomeIds" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\biomeIDs.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="retrograde" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\retrograde.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="generateVolcanos" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\generateVolcanos.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ringColor" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\ringColor.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="genType" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\genType.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="rotationalPeriod" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\rotationalPeriod.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="blackHole" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\blackHole.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="seaLevel" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\seaLevel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="fogColor" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\fogColor.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="separation" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\separation.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="size" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\size.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="x" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="skyColor" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\skyColor.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Collapse" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\Collapse.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="star" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\star.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="temp" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\temp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="venusian" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\venusian.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="volcanoFrequencyMultiplier" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\volcanoFrequencyMultiplier.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="gravitationalMultiplier" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\gravitationalMultiplier.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="waterworld" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\waterworld.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="x" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="fillerBlock" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\fillerBlock.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="y" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\y.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="exportClicked" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\exportClicked.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="numPlanets" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\numPlanets.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="marslike" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\marslike.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GasGiant" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\GasGiant.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="attributes" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\attributes.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="generateGeodes" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\generateGeodes.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="isKnown" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\isKnown.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="venusian" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\venusian.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="seaLevel" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\seaLevel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="geodeOres" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\geodeOres.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="hasRings" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\hasRings.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DIMID" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\DIMID.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="atmosphereDensity" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\atmosphereDensity.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="retrograde" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\retrograde.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="numGasGiants" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\numGasGiants.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="name" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\name.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="generateCraters" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\generateCraters.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="geodeFrequencyMultiplier" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\geodeFrequencyMultiplier.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="oceanBlock" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\oceanBlock.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="generateCaves" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\generateCaves.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="dimMapping" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\dimMapping.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="gasgiantblue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\gasgiantblue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="export" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\export.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="star" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\star.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="folderBrowser" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\folderBrowser.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

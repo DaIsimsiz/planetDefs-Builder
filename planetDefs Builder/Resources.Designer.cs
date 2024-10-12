@@ -143,9 +143,9 @@ namespace planetDefs_Builder {
         /// <summary>
         ///   System.Drawing.Bitmap türünde yerelleştirilmiş bir kaynak arar.
         /// </summary>
-        internal static System.Drawing.Bitmap craterFreqeuncyMultiplier {
+        internal static System.Drawing.Bitmap craterFrequencyMultiplier {
             get {
-                object obj = ResourceManager.GetObject("craterFreqeuncyMultiplier", resourceCulture);
+                object obj = ResourceManager.GetObject("craterFrequencyMultiplier", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -256,6 +256,16 @@ namespace planetDefs_Builder {
         internal static System.Drawing.Bitmap fogColor {
             get {
                 object obj = ResourceManager.GetObject("fogColor", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap türünde yerelleştirilmiş bir kaynak arar.
+        /// </summary>
+        internal static System.Drawing.Bitmap folderBrowser {
+            get {
+                object obj = ResourceManager.GetObject("folderBrowser", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

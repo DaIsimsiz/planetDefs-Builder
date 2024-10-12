@@ -156,7 +156,7 @@ namespace planetDefs_Builder
                                     References.NewTreeNode("x", "0"),
                                     References.NewTreeNode("y", "0")
                                 ]),
-                            References.NewTreeNode("Properties", "properties")
+                            References.NewTreeNode("Orbiting bodies", "properties")
                         ])
                         );
                     break;
@@ -194,7 +194,6 @@ namespace planetDefs_Builder
                                     References.NewTreeNode("orbitalTheta", "0"),
                                     References.NewTreeNode("orbitalPhi", "0"),
                                     References.NewTreeNode("retrograde", "false"),
-                                    References.NewTreeNode("avgTemperature", "201"),
                                     References.NewTreeNode("rotationalPeriod", "24000"),
                                     References.NewTreeNode("atmosphereDensity", "100"),
                                     References.NewTreeNode("generateCraters", "false"),
@@ -266,7 +265,7 @@ namespace planetDefs_Builder
             /*--------- 4. draw node text ---------*/
             Font nodeFont = new(
                 new FontFamily("Calibri"),
-                12,
+                12 * (96f / CreateGraphics().DpiX),
                 FontStyle.Regular,
                 GraphicsUnit.Point);
             nodeFont ??= ((TreeView)sender).Font;
@@ -360,8 +359,7 @@ namespace planetDefs_Builder
                     {
                         if (attrNode.Nodes[IndexOfText(attrNode.Nodes, "temp")].Text == "temp")
                         {
-                            int tempValue;
-                            if (int.TryParse(attrNode.Nodes[IndexOfText(attrNode.Nodes, "temp")].Name, out tempValue))
+                            if (int.TryParse(attrNode.Nodes[IndexOfText(attrNode.Nodes, "temp")].Name, out int tempValue))
                             {
                                 Color starColor = getColor(tempValue);
                                 for (int x = 0; x < starTemp.Width; x++)
