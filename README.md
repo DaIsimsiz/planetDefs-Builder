@@ -1,4 +1,4 @@
-# Advanced Rocketry `planetDef.xml` builder
+# Advanced Rocketry `planetDefs.xml` builder
 
 A program to easily create a planetDefs file for Advanced Rocketry mod with your own specifications!
 
